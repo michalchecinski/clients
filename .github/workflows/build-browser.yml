@@ -322,7 +322,7 @@ jobs:
         uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846  # v3.0.0
 
       - name: Login to Azure
-        uses: Azure/login@1f63701bf3e6892515f1b7ce2d2bf1708b46beaf
+        uses: Azure/login@6453efca84e884a7848c9681f6515bf7732bd20b
         with:
           creds: ${{ secrets.AZURE_PROD_KV_CREDENTIALS }}
 
@@ -355,7 +355,7 @@ jobs:
     steps:
 
       - name: Login to Azure
-        uses: Azure/login@ec3c14589bd3e9312b3cc8c41e6860e258df9010
+        uses: Azure/login@6453efca84e884a7848c9681f6515bf7732bd20b
         with:
           creds: ${{ secrets.AZURE_PROD_KV_CREDENTIALS }}
 
@@ -427,7 +427,7 @@ jobs:
           fi
 
       - name: Login to Azure - Prod Subscription
-        uses: Azure/login@1f63701bf3e6892515f1b7ce2d2bf1708b46beaf
+        uses: Azure/login@6453efca84e884a7848c9681f6515bf7732bd20b
         if: failure()
         with:
           creds: ${{ secrets.AZURE_PROD_KV_CREDENTIALS }}

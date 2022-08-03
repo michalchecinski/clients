@@ -17,7 +17,7 @@ jobs:
     runs-on: macos-11
     steps:
       - name: Login to Azure
-        uses: Azure/login@1f63701bf3e6892515f1b7ce2d2bf1708b46beaf
+        uses: Azure/login@6453efca84e884a7848c9681f6515bf7732bd20b
         with:
           creds: ${{ secrets.AZURE_PROD_KV_CREDENTIALS }}
 

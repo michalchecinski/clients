@@ -17,19 +17,19 @@ jobs:
     runs-on: macos-11
     steps:
       - name: Login to Azure
-        uses: Azure/login@1f63701bf3e6892515f1b7ce2d2bf1708b46beaf
+        uses: Azure/login@6453efca84e884a7848c9681f6515bf7732bd20b
         with:
           creds: ${{ secrets.AZURE_PROD_KV_CREDENTIALS }}
 
       - name: Retrieve secrets
         id: retrieve-secrets
-        uses: Azure/get-keyvault-secrets@b5c723b9ac7870c022b8c35befe620b7009b336f
+        uses: Azure/get-keyvault-secrets@c2b531e47fab4ca7cd8df09d44a65256651bf46e
         with:
           keyvault: "bitwarden-prod-kv"
           secrets: "brew-bump-workflow-pat"
 
       - name: Update Homebrew formula
-        uses: dawidd6/action-homebrew-bump-formula@dd221ff435f42fa8102b5871bb1929af9d76476c
+        uses: dawidd6/action-homebrew-bump-formula@7672fb42f695e86f16499b4366f783d701812b33
         with:
           # Required, custom GitHub access token with the 'public_repo' and 'workflow' scopes
           token: ${{ steps.retrieve-secrets.outputs.brew-bump-workflow-pat }}

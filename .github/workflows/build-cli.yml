@@ -85,7 +85,7 @@ jobs:
           choco install nasm --no-progress
 
       - name: Set up Node
-        uses: actions/setup-node@17f8bd926464a1afa4c6a11669539e9c1ba77048  # v3.2.0
+        uses: actions/setup-node@348e00800850ca70958af8888ebdb3cce7cbcddc  # v3.2.0
         with:
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
@@ -270,7 +270,7 @@ jobs:
           echo "BW Package Version: $_PACKAGE_VERSION"
 
       - name: Get bw linux cli
-        uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741
+        uses: actions/download-artifact@076f0f7dd036d87e8e04f5f00d614e790308961b
         with:
           name: bw-linux-${{ env._PACKAGE_VERSION }}.zip
           path: apps/cli/dist/snap
@@ -283,7 +283,7 @@ jobs:
           ls -alth
 
       - name: Build snap
-        uses: snapcore/action-build@ea14cdeb353272f75977040488ca191880509a8c  # v1.1.0
+        uses: snapcore/action-build@a627c9589b868a9f0224614ab79fb2cffad84b63  # v1.1.0
         with:
           path: apps/cli/dist/snap
 
@@ -356,21 +356,21 @@ jobs:
           fi
 
       - name: Login to Azure - Prod Subscription
-        uses: Azure/login@ec3c14589bd3e9312b3cc8c41e6860e258df9010  # v1.1
+        uses: Azure/login@6453efca84e884a7848c9681f6515bf7732bd20b  # v1.1
         if: failure()
         with:
           creds: ${{ secrets.AZURE_PROD_KV_CREDENTIALS }}
 
       - name: Retrieve secrets
         id: retrieve-secrets
-        uses: Azure/get-keyvault-secrets@b5c723b9ac7870c022b8c35befe620b7009b336f
+        uses: Azure/get-keyvault-secrets@c2b531e47fab4ca7cd8df09d44a65256651bf46e
         if: failure()
         with:
           keyvault: "bitwarden-prod-kv"
           secrets: "devops-alerts-slack-webhook-url"
 
       - name: Notify Slack on failure
-        uses: act10ns/slack@da3191ebe2e67f49b46880b4633f5591a96d1d33
+        uses: act10ns/slack@fd88f3dbc81b899b45cdf795a11eea98c133fbc2
         if: failure()
         env:
           SLACK_WEBHOOK_URL: ${{ steps.retrieve-secrets.outputs.devops-alerts-slack-webhook-url }}

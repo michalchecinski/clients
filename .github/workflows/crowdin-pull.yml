@@ -23,22 +23,22 @@ jobs:
             crowdin_project_id: "308189"
     steps:
       - name: Checkout repo
-        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f  # v2.3.4
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v2.3.4
 
       - name: Login to Azure
-        uses: Azure/login@77f1b2e3fb80c0e8645114159d17008b8a2e475a
+        uses: Azure/login@6453efca84e884a7848c9681f6515bf7732bd20b
         with:
           creds: ${{ secrets.AZURE_PROD_KV_CREDENTIALS }}
 
       - name: Retrieve secrets
         id: retrieve-secrets
-        uses: Azure/get-keyvault-secrets@80ccd3fafe5662407cc2e55f202ee34bfff8c403
+        uses: Azure/get-keyvault-secrets@c2b531e47fab4ca7cd8df09d44a65256651bf46e
         with:
           keyvault: "bitwarden-prod-kv"
           secrets: "crowdin-api-token"
 
       - name: Download translations
-        uses: bitwarden/gh-actions/crowdin@05052c5c575ceb09ceea397fe241879e199ed44b
+        uses: bitwarden/gh-actions/crowdin@2c35b532fff94b3dc38ec5be1f05081fe8baf57a
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CROWDIN_API_TOKEN: ${{ steps.retrieve-secrets.outputs.crowdin-api-token }}

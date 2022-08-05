@@ -75,7 +75,7 @@ jobs:
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v3.0.2
 
       - name: Set up Node
-        uses: actions/setup-node@56337c425554a6be30cdef71bf441f15be286854  # v3.1.1
+        uses: actions/setup-node@348e00800850ca70958af8888ebdb3cce7cbcddc  # v3.1.1
         with:
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
@@ -101,7 +101,7 @@ jobs:
           zip -r web-$_VERSION-selfhosted-open-source.zip build
 
       - name: Upload build artifact
-        uses: actions/upload-artifact@6673cd052c4cd6fcf4b4e6e60ea986c889389535  # v3.0.0
+        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8  # v3.0.0
         with:
           name: web-${{ env._VERSION }}-selfhosted-open-source.zip
           path: apps/web/web-${{ env._VERSION }}-selfhosted-open-source.zip
@@ -120,7 +120,7 @@ jobs:
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v3.0.2
 
       - name: Set up Node
-        uses: actions/setup-node@56337c425554a6be30cdef71bf441f15be286854  # v3.1.1
+        uses: actions/setup-node@348e00800850ca70958af8888ebdb3cce7cbcddc  # v3.1.1
         with:
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
@@ -146,7 +146,7 @@ jobs:
           zip -r web-$_VERSION-cloud-COMMERCIAL.zip build
 
       - name: Upload build artifact
-        uses: actions/upload-artifact@6673cd052c4cd6fcf4b4e6e60ea986c889389535  # v3.0.0
+        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8  # v3.0.0
         with:
           name: web-${{ env._VERSION }}-cloud-COMMERCIAL.zip
           path: apps/web/web-${{ env._VERSION }}-cloud-COMMERCIAL.zip
@@ -165,7 +165,7 @@ jobs:
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v3.0.2
 
       - name: Set up Node
-        uses: actions/setup-node@56337c425554a6be30cdef71bf441f15be286854  # v3.1.1
+        uses: actions/setup-node@348e00800850ca70958af8888ebdb3cce7cbcddc  # v3.1.1
         with:
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
@@ -184,7 +184,7 @@ jobs:
       - name: Setup DCT
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/rc' || github.ref == 'refs/heads/hotfix-rc'
         id: setup-dct
-        uses: bitwarden/gh-actions/setup-docker-trust@a8c384a05a974c05c48374c818b004be221d43ff
+        uses: bitwarden/gh-actions/setup-docker-trust@2c35b532fff94b3dc38ec5be1f05081fe8baf57a
         with:
           azure-creds: ${{ secrets.AZURE_PROD_KV_CREDENTIALS }}
           azure-keyvault-name: "bitwarden-prod-kv"
@@ -203,7 +203,7 @@ jobs:
           zip -r web-$_VERSION-selfhosted-COMMERCIAL.zip build
 
       - name: Upload build artifact
-        uses: actions/upload-artifact@6673cd052c4cd6fcf4b4e6e60ea986c889389535  # v3.0.0
+        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8  # v3.0.0
         with:
           name: web-${{ env._VERSION }}-selfhosted-COMMERCIAL.zip
           path: apps/web/web-${{ env._VERSION }}-selfhosted-COMMERCIAL.zip
@@ -260,7 +260,7 @@ jobs:
           echo "DOCKER_CONTENT_TRUST=0" >> $GITHUB_ENV
 
       - name: Login to Azure - QA Subscription
-        uses: Azure/login@ec3c14589bd3e9312b3cc8c41e6860e258df9010  # v1.1
+        uses: Azure/login@6453efca84e884a7848c9681f6515bf7732bd20b  # v1.1
         with:
           creds: ${{ secrets.AZURE_QA_KV_CREDENTIALS }}
 
@@ -293,7 +293,7 @@ jobs:
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v3.0.2
 
       - name: Set up Node
-        uses: actions/setup-node@56337c425554a6be30cdef71bf441f15be286854  # v3.1.1
+        uses: actions/setup-node@348e00800850ca70958af8888ebdb3cce7cbcddc  # v3.1.1
         with:
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
@@ -310,7 +310,7 @@ jobs:
           echo "GitHub event: $GITHUB_EVENT"
 
       - name: Login to Azure
-        uses: Azure/login@ec3c14589bd3e9312b3cc8c41e6860e258df9010  # v1.1
+        uses: Azure/login@6453efca84e884a7848c9681f6515bf7732bd20b  # v1.1
         with:
           creds: ${{ secrets.AZURE_QA_KV_CREDENTIALS }}
 
@@ -387,19 +387,19 @@ jobs:
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v3.0.2  # v2.3.4
 
       - name: Login to Azure
-        uses: Azure/login@ec3c14589bd3e9312b3cc8c41e6860e258df9010  # v1.1
+        uses: Azure/login@6453efca84e884a7848c9681f6515bf7732bd20b  # v1.1
         with:
           creds: ${{ secrets.AZURE_PROD_KV_CREDENTIALS }}
 
       - name: Retrieve secrets
         id: retrieve-secrets
-        uses: Azure/get-keyvault-secrets@b5c723b9ac7870c022b8c35befe620b7009b336f  # v1.0.0
+        uses: Azure/get-keyvault-secrets@c2b531e47fab4ca7cd8df09d44a65256651bf46e  # v1.0.0
         with:
           keyvault: "bitwarden-prod-kv"
           secrets: "crowdin-api-token"
 
       - name: Upload Sources
-        uses: crowdin/github-action@ecd7eb0ef6f3cfa16293c79e9cbc4bc5b5fd9c49  # v1.4.9
+        uses: crowdin/github-action@5f66d40865fa78fc25c5846825cc8d629cfa88d6  # v1.4.9
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CROWDIN_API_TOKEN: ${{ steps.retrieve-secrets.outputs.crowdin-api-token }}
@@ -452,21 +452,21 @@ jobs:
           fi
 
       - name: Login to Azure - Prod Subscription
-        uses: Azure/login@ec3c14589bd3e9312b3cc8c41e6860e258df9010  # v1.1
+        uses: Azure/login@6453efca84e884a7848c9681f6515bf7732bd20b  # v1.1
         if: failure()
         with:
           creds: ${{ secrets.AZURE_PROD_KV_CREDENTIALS }}
 
       - name: Retrieve secrets
         id: retrieve-secrets
-        uses: Azure/get-keyvault-secrets@b5c723b9ac7870c022b8c35befe620b7009b336f  # v1.0.0
+        uses: Azure/get-keyvault-secrets@c2b531e47fab4ca7cd8df09d44a65256651bf46e  # v1.0.0
         if: failure()
         with:
           keyvault: "bitwarden-prod-kv"
           secrets: "devops-alerts-slack-webhook-url"
 
       - name: Notify Slack on failure
-        uses: act10ns/slack@da3191ebe2e67f49b46880b4633f5591a96d1d33  # v1.5.1
+        uses: act10ns/slack@fd88f3dbc81b899b45cdf795a11eea98c133fbc2  # v1.5.1
         if: failure()
         env:
           SLACK_WEBHOOK_URL: ${{ steps.retrieve-secrets.outputs.devops-alerts-slack-webhook-url }}

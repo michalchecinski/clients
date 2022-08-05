@@ -26,19 +26,19 @@ jobs:
         run: export PATH=$PATH:~/work/web/web
 
       - name: Login to Azure
-        uses: Azure/login@ec3c14589bd3e9312b3cc8c41e6860e258df9010  # v1.1
+        uses: Azure/login@6453efca84e884a7848c9681f6515bf7732bd20b  # v1.1
         with:
           creds: ${{ secrets.AZURE_QA_KV_CREDENTIALS }}
 
       - name: Retrieve secrets
         id: retrieve-secrets
-        uses: Azure/get-keyvault-secrets@b5c723b9ac7870c022b8c35befe620b7009b336f  # v1
+        uses: Azure/get-keyvault-secrets@c2b531e47fab4ca7cd8df09d44a65256651bf46e  # v1
         with:
           keyvault: "bitwarden-qa-kv"
           secrets: "qa-aks-kubectl-credentials"
 
       - name: Login with qa-aks-kubectl-credentials SP
-        uses: Azure/login@ec3c14589bd3e9312b3cc8c41e6860e258df9010  # v1.1
+        uses: Azure/login@6453efca84e884a7848c9681f6515bf7732bd20b  # v1.1
         with:
           creds: ${{ env.qa-aks-kubectl-credentials }}
 
@@ -73,7 +73,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Create GitHub deployment
-        uses: chrnorm/deployment-action@1b599fe41a0ef1f95191e7f2eec4743f2d7dfc48
+        uses: chrnorm/deployment-action@3afecce166a0a2f92d3a9e7351a9908a72121c24
         id: deployment
         with:
           token: '${{ secrets.GITHUB_TOKEN }}'
@@ -82,7 +82,7 @@ jobs:
           description: 'Deployment from branch ${{ github.ref_name }}'
       
       - name: Update deployment status to In Progress
-        uses: chrnorm/deployment-status@07b3930847f65e71c9c6802ff5a402f6dfb46b86
+        uses: chrnorm/deployment-status@8a81fd4d7b467e95818f2c6a1b5b228de211e90c
         with:
           token: '${{ secrets.GITHUB_TOKEN }}'
           environment-url: http://vault.qa.bitwarden.pw
@@ -93,7 +93,7 @@ jobs:
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v3.0.2
 
       - name: Download latest cloud asset
-        uses: bitwarden/gh-actions/download-artifacts@c1fa8e09871a860862d6bbe36184b06d2c7e35a8
+        uses: bitwarden/gh-actions/download-artifacts@2c35b532fff94b3dc38ec5be1f05081fe8baf57a
         with:
           workflow: build-web.yml
           path: apps/web
@@ -138,7 +138,7 @@ jobs:
 
       - name: Update deployment status to Success
         if: success()
-        uses: chrnorm/deployment-status@07b3930847f65e71c9c6802ff5a402f6dfb46b86
+        uses: chrnorm/deployment-status@8a81fd4d7b467e95818f2c6a1b5b228de211e90c
         with:
           token: '${{ secrets.GITHUB_TOKEN }}'
           environment-url: http://vault.qa.bitwarden.pw
@@ -147,7 +147,7 @@ jobs:
 
       - name: Update deployment status to Failure
         if: failure()
-        uses: chrnorm/deployment-status@07b3930847f65e71c9c6802ff5a402f6dfb46b86
+        uses: chrnorm/deployment-status@8a81fd4d7b467e95818f2c6a1b5b228de211e90c
         with:
           token: '${{ secrets.GITHUB_TOKEN }}'
           environment-url: http://vault.qa.bitwarden.pw

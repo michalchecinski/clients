@@ -37,7 +37,7 @@ jobs:
 
       - name: Check Release Version
         id: version
-        uses: bitwarden/gh-actions/release-version-check@8f055ef543c7433c967a1b9b04a0f230923233bb
+        uses: bitwarden/gh-actions/release-version-check@2c35b532fff94b3dc38ec5be1f05081fe8baf57a
         with:
           release-type: ${{ github.event.inputs.release_type }}
           project-type: ts
@@ -69,7 +69,7 @@ jobs:
       ########## DockerHub ##########
       - name: Setup DCT
         id: setup-dct
-        uses: bitwarden/gh-actions/setup-docker-trust@a8c384a05a974c05c48374c818b004be221d43ff
+        uses: bitwarden/gh-actions/setup-docker-trust@2c35b532fff94b3dc38ec5be1f05081fe8baf57a
         with:
           azure-creds: ${{ secrets.AZURE_PROD_KV_CREDENTIALS }}
           azure-keyvault-name: "bitwarden-prod-kv"
@@ -105,7 +105,7 @@ jobs:
 
       ########## ACR ##########
       - name: Login to Azure - QA Subscription
-        uses: Azure/login@ec3c14589bd3e9312b3cc8c41e6860e258df9010  # v1.1
+        uses: Azure/login@6453efca84e884a7848c9681f6515bf7732bd20b  # v1.1
         with:
           creds: ${{ secrets.AZURE_QA_KV_CREDENTIALS }}
 
@@ -154,7 +154,7 @@ jobs:
 
       - name: Download latest cloud asset
         if: ${{ github.event.inputs.release_type != 'Dry Run' }}
-        uses: bitwarden/gh-actions/download-artifacts@c1fa8e09871a860862d6bbe36184b06d2c7e35a8
+        uses: bitwarden/gh-actions/download-artifacts@2c35b532fff94b3dc38ec5be1f05081fe8baf57a
         with:
           workflow: build-web.yml
           path: apps/web
@@ -164,7 +164,7 @@ jobs:
 
       - name: Download latest cloud asset
         if: ${{ github.event.inputs.release_type == 'Dry Run' }}
-        uses: bitwarden/gh-actions/download-artifacts@c1fa8e09871a860862d6bbe36184b06d2c7e35a8
+        uses: bitwarden/gh-actions/download-artifacts@2c35b532fff94b3dc38ec5be1f05081fe8baf57a
         with:
           workflow: build-web.yml
           path: apps/web
@@ -228,7 +228,7 @@ jobs:
       - cfpages-deploy
     steps:
       - name: Create GitHub deployment
-        uses: chrnorm/deployment-action@1b599fe41a0ef1f95191e7f2eec4743f2d7dfc48
+        uses: chrnorm/deployment-action@3afecce166a0a2f92d3a9e7351a9908a72121c24
         id: deployment
         with:
           token: '${{ secrets.GITHUB_TOKEN }}'
@@ -238,7 +238,7 @@ jobs:
           task: release
       
       - name: Update deployment status to In Progress
-        uses: chrnorm/deployment-status@07b3930847f65e71c9c6802ff5a402f6dfb46b86
+        uses: chrnorm/deployment-status@8a81fd4d7b467e95818f2c6a1b5b228de211e90c
         with:
           token: '${{ secrets.GITHUB_TOKEN }}'
           environment-url: http://vault.bitwarden.com
@@ -247,7 +247,7 @@ jobs:
 
       - name: Download latest build artifacts
         if: ${{ github.event.inputs.release_type != 'Dry Run' }}
-        uses: bitwarden/gh-actions/download-artifacts@c1fa8e09871a860862d6bbe36184b06d2c7e35a8
+        uses: bitwarden/gh-actions/download-artifacts@2c35b532fff94b3dc38ec5be1f05081fe8baf57a
         with:
           workflow: build-web.yml
           path: apps/web/artifacts
@@ -258,7 +258,7 @@ jobs:
 
       - name: Download latest build artifacts
         if: ${{ github.event.inputs.release_type == 'Dry Run' }}
-        uses: bitwarden/gh-actions/download-artifacts@c1fa8e09871a860862d6bbe36184b06d2c7e35a8
+        uses: bitwarden/gh-actions/download-artifacts@2c35b532fff94b3dc38ec5be1f05081fe8baf57a
         with:
           workflow: build-web.yml
           path: apps/web/artifacts
@@ -275,7 +275,7 @@ jobs:
 
       - name: Create release
         if: ${{ github.event.inputs.release_type != 'Dry Run' }}
-        uses: ncipollo/release-action@58ae73b360456532aafd58ee170c045abbeaee37  # v1.10.0
+        uses: ncipollo/release-action@3d2de22e3d0beab188d8129c27f103d8e91bf13a  # v1.10.0
         with:
           name: "Version v${{ needs.setup.outputs.release_version }}"
           commit: ${{ github.sha }}
@@ -288,7 +288,7 @@ jobs:
 
       - name: Update deployment status to Success
         if: success()
-        uses: chrnorm/deployment-status@07b3930847f65e71c9c6802ff5a402f6dfb46b86
+        uses: chrnorm/deployment-status@8a81fd4d7b467e95818f2c6a1b5b228de211e90c
         with:
           token: '${{ secrets.GITHUB_TOKEN }}'
           environment-url: http://vault.bitwarden.com
@@ -297,7 +297,7 @@ jobs:
 
       - name: Update deployment status to Failure
         if: failure()
-        uses: chrnorm/deployment-status@07b3930847f65e71c9c6802ff5a402f6dfb46b86
+        uses: chrnorm/deployment-status@8a81fd4d7b467e95818f2c6a1b5b228de211e90c
         with:
           token: '${{ secrets.GITHUB_TOKEN }}'
           environment-url: http://vault.bitwarden.com

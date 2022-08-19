@@ -1,15 +1,15 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "schedule": [
-    "after 8am",
-    "after 9am",
-    "after 10am",
-    "after 11am",
-    "after 12pm",
-    "after 1pm",
-    "after 2pm",
-    "after 3pm",
-    "after 4pm"
+    "before 9am",
+    "before 10am",
+    "before 11am",
+    "before 12pm",
+    "before 1pm",
+    "before 2pm",
+    "before 3pm",
+    "before 4pm",
+    "before 5pm"
   ],
   "extends": [
     "config:base",
@@ -20,6 +20,7 @@
   "enabledManagers": [
     "npm"
   ],
+  "separateMajorMinor": false,
   "packageRules": [
     {
         "matchManagers": ["npm"],

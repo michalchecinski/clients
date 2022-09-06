@@ -1,0 +1,25 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":maintainLockFilesMonthly",
+    ":preserveSemverRanges",
+    ":rebaseStalePrs",
+    ":disableDependencyDashboard",
+    ":disableMajorUpdates"
+  ],
+  "enabledManagers": ["npm"],
+  "packageRules": [
+    {
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "npm"
+    }
+  ],
+  "ignoreDeps": [
+    "bootstrap",
+    "electron-builder",
+    "node-ipc",
+    "regedit"
+  ]
+}

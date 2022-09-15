@@ -28,7 +28,7 @@
     },
     {
       "matchPackagePatterns": [
-        "Microsoft/TypeScript"
+        "typescript"
       ],
       "matchUpdateTypes": [
         "patch"

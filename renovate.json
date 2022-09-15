@@ -13,7 +13,9 @@
   ],
   "packageRules": [
     {
-      "matchPackagePatterns": ["Microsoft/TypeScript"],
+      "matchPackagePatterns": [
+        "typescript"
+      ],
       "enabled": false
     },
     {
@@ -27,12 +29,10 @@
       "groupName": "npm"
     },
     {
-      "matchPackagePatterns": [
+      "packageNames": [
         "typescript"
       ],
-      "matchUpdateTypes": [
-        "patch"
-      ]
+      "updateTypes": "patch"
     },
   ],
   "ignoreDeps": [

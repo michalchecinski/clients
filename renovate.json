@@ -13,6 +13,10 @@
   ],
   "packageRules": [
     {
+      "matchPackagePatterns": ["Microsoft/TypeScript"],
+      "enabled": false
+    },
+    {
       "matchManagers": [
         "npm"
       ],
@@ -24,7 +28,7 @@
     },
     {
       "matchPackagePatterns": [
-        "Microsoft/TypeScript",
+        "Microsoft/TypeScript"
       ],
       "matchUpdateTypes": [
         "patch"

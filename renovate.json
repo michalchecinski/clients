@@ -8,13 +8,28 @@
     ":disableDependencyDashboard",
     ":disableMajorUpdates"
   ],
-  "enabledManagers": ["npm"],
+  "enabledManagers": [
+    "npm"
+  ],
   "packageRules": [
     {
-      "matchManagers": ["npm"],
-      "matchUpdateTypes": ["minor", "patch"],
+      "matchManagers": [
+        "npm"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
       "groupName": "npm"
-    }
+    },
+    {
+      "matchPackagePatterns": [
+        "Microsoft/TypeScript",
+      ],
+      "matchUpdateTypes": [
+        "patch"
+      ]
+    },
   ],
   "ignoreDeps": [
     "bootstrap",

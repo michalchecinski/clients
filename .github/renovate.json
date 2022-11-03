@@ -10,7 +10,7 @@
   ],
   "schedule": [
     "before 12pm"
-  ]
+  ],
   "enabledManagers": ["npm"],
   "packageRules": [
     {

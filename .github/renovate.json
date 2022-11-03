@@ -2,12 +2,15 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base",
-    "schedule:monthly",
+    //"schedule:monthly",
     ":maintainLockFilesMonthly",
-    ":preserveSemverRanges",
+    //":preserveSemverRanges",
     ":rebaseStalePrs",
     ":disableMajorUpdates"
   ],
+  "schedule": [
+    "before 12pm"
+  ]
   "enabledManagers": ["npm"],
   "packageRules": [
     {
